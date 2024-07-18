@@ -6,7 +6,9 @@
   "scripts": {
     "db:init": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
-    "test": "jest --runInBand"
+    "db:everythig": "npm run db:init && npm run db:seed",
+    "test": "jest --runInBand",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,12 @@
   },
   "homepage": "https://github.com/joinpursuit/tuner-full-stack-app#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "jest": "^27.4.7",
+    "pg-promise": "^11.9.1",
     "supertest": "^6.2.0"
-  }
+  },
+  "keywords": []
 }
