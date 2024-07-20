@@ -3,25 +3,6 @@ const request = require("supertest");
 const songs = require("../app.js");
 const db = require("../db/dbConfig.js");
 
-// describe("One", () => {
-//   it("hi", () => {
-//     expect(1).toBe(1);
-//   });
-//   describe("Two", () => {
-//     describe("Two.point oh", () => {
-//       it("hello", () => {
-//         expect(1).toBe(1);
-//       });
-//     });
-
-//     describe("Three", () => {
-//       it("hello", () => {
-//         expect(1).toBe(1);
-//       });
-//     });
-//   });
-// });
-
 describe("Basic root route", () => {
   describe("/", () => {
     it("is able to make a successful get request to /, that returns a string", async () => {
