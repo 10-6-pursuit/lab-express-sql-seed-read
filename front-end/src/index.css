@@ -1,0 +1,105 @@
+/* src/index.css */
+
+/* Basic reset and global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Container for main content */
+.container {
+    padding: 20px;
+}
+
+/* Navigation bar styles */
+.navbar {
+    margin-bottom: 20px;
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #cfd6dc;
+}
+
+/* List items styling */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Buttons styling */
+button {
+    margin: 5px;
+}
+
+/* Form styles */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    border-radius: 4px;
+}
+
+/* Button variants */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Error and confirmation messages */
+.alert {
+    margin-top: 20px;
+}
+
+/* Specific styles for SongList */
+.song-title {
+    font-weight: bold;
+}
+
+.song-artist {
+    color: #6c757d;
+}
+
+.song-time {
+    font-style: italic;
+}
