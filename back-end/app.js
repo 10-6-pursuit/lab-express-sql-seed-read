@@ -17,6 +17,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Welcome to Youtunes");
 })
+
 app.use("/songs", songsController);
 
 // 404 page

@@ -16,7 +16,10 @@ songs.get("/", async (req, res) => {
 songs.get("/:id", async (req, res) => {
     const { id } = req.params;
     const song = await getSong(id);
-    if (song) {
+    console.log(song.received)
+    if (song.received === 0) {
+        res.status(404).send("Page not found");
+    } else if (song) {
         res.status(200).json(song);
     } else {
         res.status(404).json({ error: "not found" });
