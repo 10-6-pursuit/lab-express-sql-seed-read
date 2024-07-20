@@ -34,4 +34,4 @@ const addSong = async (song) => {
     }
 }
 
-module.exports = { getAllSongs, getSong, addSong, };
+module.exports = { getAllSongs, getSong, addSong };
