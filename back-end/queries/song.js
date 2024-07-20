@@ -1,6 +1,5 @@
 const db = require("../db/dbConfig.js");
 
-
 // function to get all songs
 const getAllSongs = async () => {
     try {

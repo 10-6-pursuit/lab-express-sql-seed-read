@@ -2,6 +2,7 @@ const express = require("express");
 const songs = express.Router();
 const { getAllSongs, getSong, addSong } = require("../queries/song");
 const { checkName, checkArtist, checkBoolean } = require("../validations/checkSongs.js")
+
 // Index All Songs Route
 songs.get("/", async (req, res) => {
     const allSongs = await getAllSongs();
@@ -16,7 +17,6 @@ songs.get("/", async (req, res) => {
 songs.get("/:id", async (req, res) => {
     const { id } = req.params;
     const song = await getSong(id);
-    console.log(song.received)
     if (song.received === 0) {
         res.status(404).send("Page not found");
     } else if (song) {

@@ -2,7 +2,6 @@
 const cors = require("cors");
 const express = require("express");
 
-
 // Configuration
 const app = express();
 
@@ -24,7 +23,6 @@ app.use("/songs", songsController);
 app.get("*", (req, res) => {
     res.status(404).send("Page not found");
 })
-
 
 // Export
 module.exports = app;
