@@ -9,7 +9,6 @@ const cn = {
     user: process.env.PG_USER
 };
 
-console.log(cn)
 const db = pgp(cn);
 
 db.connect()
