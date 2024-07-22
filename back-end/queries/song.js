@@ -10,6 +10,47 @@ const getAllSongs = async () => {
     }
 };
 
+// function to get songs in asc order
+const getAscSongs = async () => {
+    try {
+        const ascSongs = await db.any("SELECT * FROM songs ORDER BY name ASC");
+        return ascSongs;
+    } catch (error) {
+        return error;
+    }
+}
+
+// function to get songs in desc order
+const getDescSongs = async () => {
+    try {
+        const descSongs = await db.any("SELECT * FROM songs ORDER BY name DESC");
+        return descSongs;
+    } catch (error) {
+        return error;
+    }
+}
+
+// function to get all songs where value of is_favorite if true
+const getFavSongs = async () => {
+    try {
+        const allFavSongs = await db.any("SELECT * FROM songs WHERE is_favorite = true");
+        return allFavSongs;
+    } catch (error) {
+        return error;
+    }
+}
+
+// function to get all songs where value of is_favorite if true
+const getNotFavSongs = async () => {
+    try {
+        const allNotFavSongs = await db.any("SELECT * FROM songs WHERE is_favorite = false");
+        return allNotFavSongs;
+    } catch (error) {
+        return error;
+    }
+}
+
+
 // function to get a single song with id
 const getSong = async (id) => {
     try {
@@ -56,4 +97,14 @@ const updateSong = async (id, song) => {
     }
 }
 
-module.exports = { getAllSongs, getSong, addSong, deleteSong, updateSong };
+module.exports = { 
+    getAllSongs, 
+    getSong, 
+    addSong, 
+    deleteSong, 
+    updateSong, 
+    getAscSongs, 
+    getDescSongs,
+    getFavSongs,
+    getNotFavSongs
+};

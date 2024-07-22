@@ -1,21 +1,58 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs, getSong, addSong, deleteSong, updateSong } = require("../queries/song");
+const { getAllSongs, getSong, addSong, deleteSong, updateSong, getAscSongs, getDescSongs, getFavSongs, getNotFavSongs } = require("../queries/song");
 const { checkName, checkArtist, checkBoolean } = require("../validations/checkSongs.js")
 
 // Index All Songs Route
 songs.get("/", async (req, res) => {
-    const allSongs = await getAllSongs();
-    if (allSongs[0]) {
-        res.status(200).json(allSongs);
+    let listOfSongs;
+    console.log(req.query)
+    switch (req.query.order) {
+        case "asc":
+        listOfSongs = await getAscSongs();
+        break;
+        case "desc":
+        listOfSongs = await getDescSongs();
+        break;
+        default:
+        listOfSongs = await getAllSongs();
+    }
+    switch (req.query.is_favorite) {
+        case "true":
+        listOfSongs = await getFavSongs();
+        break;
+        case "false":
+        listOfSongs = await getNotFavSongs();
+        break;
+        default:
+        listOfSongs = await getAllSongs();
+    }
+    if (listOfSongs[0])  {
+        res.status(200).json(listOfSongs);
     } else {
         res.status(500).json({ error: "server error"});
     }
+    // if ( order === "asc") {
+    //     const ascSongs = await getAscSongs();
+    //     if (ascSongs[0]) {
+    //         res.status(200).json(ascSongs);
+    //     } else {
+    //         res.status(500).json({ error: "server error"});
+    //     }
+    // }
+
+    // const allSongs = await getAllSongs();
+    // if (allSongs[0]) {
+    //     res.status(200).json(allSongs);
+    // } else {
+    //     res.status(500).json({ error: "server error"});
+    // }
 })
 
 // Show Individual Song Route
 songs.get("/:id", async (req, res) => {
     const { id } = req.params;
+    console.log(req.params)
     const song = await getSong(id);
     if (song.received === 0) {
         res.status(404).send("Page not found");
