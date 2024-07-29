@@ -6,7 +6,6 @@ const { checkName, checkArtist, checkBoolean } = require("../validations/checkSo
 // Index All Songs Route
 songs.get("/", async (req, res) => {
     let listOfSongs;
-    console.log(req.query)
     switch (req.query.order) {
         case "asc":
         listOfSongs = await getAscSongs();
