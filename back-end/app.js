@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const songs = require("./controllers/songsController.js");
+const songs = require("./controllers/songController.js");
 app.use("/songs", songs);
 
 // ROUTES
