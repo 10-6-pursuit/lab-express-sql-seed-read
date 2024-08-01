@@ -5,8 +5,8 @@ CREATE DATABASE songs_db;
 
 CREATE TABLE songs (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) ,
-    artist TEXT,
+    name TEXT NOT NULL,
+    artist TEXT NOT NULL,
     album TEXT,
     time TEXT,
     is_favorite BOOLEAN 
