@@ -15,36 +15,3 @@ a {
 a:hover, button:hover {
     cursor: pointer;
 }
-
-.nav-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #B71C1C;
-    width: 10vw;
-    height: 100vh;
-    position: fixed;
-}
-
-.nav-container img {
-    filter: drop-shadow(0px 0px 1px #D32F2F);
-    width: 90%;
-    margin-bottom: 100px;
-}
-
-.nav-container nav {
-    display: flex;
-    flex-direction: column;
-    gap: 5vw;
-}
-
-.nav-container a {
-    color: #FFFFFF;
-    background-color: #D32F2F;
-    border: 1px solid #D32F2F;
-    border-radius: 15px;
-    padding: 5px 1vw;
-    filter: drop-shadow(0px 0px 1px #D32F2F);
-    text-align: center;
-}

@@ -1,12 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Home from "./components/Home";
-import Nav from "./components/Nav";
-import NotFound from "./components/NotFound";
-import Song from "./components/Song";
-import SongForm from "./components/SongForm";
-import Songs from "./components/Songs.jsx";
+import Home from "./components/Home/Home.jsx";
+import Nav from "./components/Nav/Nav.jsx";
+import NotFound from "./components/NotFound/NotFound.jsx";
+import Song from "./components/Song/Song.jsx";
+import SongForm from "./components/SongForm/SongForm.jsx";
+import Songs from "./components/Songs/Songs.jsx";
 
 import "./App.css";
 
