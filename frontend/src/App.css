@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #FFCDD2;
+    font-family: Poppins, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover, button:hover {
+    cursor: pointer;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #B71C1C;
+    width: 10vw;
+    height: 100vh;
+    position: fixed;
+}
+
+.nav-container img {
+    filter: drop-shadow(0px 0px 1px #D32F2F);
+    width: 90%;
+    margin-bottom: 100px;
+}
+
+.nav-container nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5vw;
+}
+
+.nav-container a {
+    color: #FFFFFF;
+    background-color: #D32F2F;
+    border: 1px solid #D32F2F;
+    border-radius: 15px;
+    padding: 5px 1vw;
+    filter: drop-shadow(0px 0px 1px #D32F2F);
+    text-align: center;
+}

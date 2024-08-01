@@ -100,3 +100,11 @@ Make a link to the edit form on the show page
 - write your own tests addtional tests for any new features you implement
 - add a 404 page
 - add functionality that when a user presses the delete button a confirmation appears first
+
+### Color Pallet
+
+- Primary Red: #D32F2F (For main buttons, icons, and highlights)
+- Dark Red: #B71C1C (For headers, footers, and accent areas)
+- Light Red: #FFCDD2 (For backgrounds and less prominent areas)
+- Gray: #424242 (For text and secondary elements)
+- White: #FFFFFF (For backgrounds and to provide contrast)
