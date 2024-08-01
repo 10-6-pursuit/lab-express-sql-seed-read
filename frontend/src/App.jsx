@@ -12,16 +12,18 @@ import "./App.css";
 
 export default function App() {
   return (
-    <>
+    <div className="app-container">
       <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/songs" element={<Songs />} />
-        <Route path="/songs/:id" element={<Song />} />
-        <Route path="/songs/new" element={<SongForm />} />
-        <Route path="/songs/:id/edit" element={<SongForm />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/songs" element={<Songs />} />
+          <Route path="/songs/:id" element={<Song />} />
+          <Route path="/songs/new" element={<SongForm />} />
+          <Route path="/songs/:id/edit" element={<SongForm />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
