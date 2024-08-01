@@ -10,5 +10,6 @@ CREATE TABLE songs (
     album TEXT,
     time TEXT,
     img_url TEXT NOT NUll,
+    vid_url TEXT NOT NUll,
     is_favorite BOOLEAN
 );
