@@ -58,10 +58,23 @@ const updateSong = async (song) => {
   }
 };
 
+const updateFavoriteStatus = async (id, is_favorite) => {
+  try {
+    const updatedSong = await db.one(
+      "UPDATE songs SET is_favorite=$1 WHERE id=$2 RETURNING *",
+      [is_favorite, id]
+    );
+    return updatedSong;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getSong,
   getAllSongs,
   createSong,
   deleteSong,
   updateSong,
+  updateFavoriteStatus,
 };

@@ -68,3 +68,23 @@ export async function deleteSong(id) {
   }
   return response.json();
 }
+
+// Update favorite status
+export async function updateFavoriteStatus(id, is_favorite) {
+  const options = {
+    method: "PUT",
+    body: JSON.stringify({ is_favorite }),
+    headers: { "Content-Type": "application/json" },
+  };
+  try {
+    const response = await fetch(`${URL}/songs/${id}/favorite`, options);
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating favorite status:", error);
+    throw error;
+  }
+}

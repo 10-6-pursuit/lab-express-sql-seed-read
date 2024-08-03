@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSongs, updateSong } from "../../utils/functions";
+import { getSongs, updateFavoriteStatus } from "../../utils/functions";
 import { Link } from "react-router-dom";
 import "./Songs.css";
 
@@ -19,9 +19,9 @@ export default function Songs() {
     fetchSongs();
   }, []);
 
-  const handleFavorite = async (id, currentStatus) => {
+  const handleFavoriteToggle = async (id, currentStatus) => {
     try {
-      const updatedSong = await updateSong(id, { is_favorite: !currentStatus });
+      const updatedSong = await updateFavoriteStatus(id, !currentStatus);
       setSongs((prevSongs) =>
         prevSongs.map((song) =>
           song.id === id
@@ -43,10 +43,12 @@ export default function Songs() {
         <h3>Artist</h3>
         <h3>Time</h3>
       </div>
-      {songs
+      {songs.length > 0
         ? songs.map((song) => (
             <div key={song.id} className="songs-container_song list">
-              <p onClick={() => handleFavorite(song.id, song.is_favorite)}>
+              <p
+                onClick={() => handleFavoriteToggle(song.id, song.is_favorite)}
+              >
                 {song.is_favorite ? "★" : "☆"}
               </p>
               <Link to={`/${song.id}`}>
