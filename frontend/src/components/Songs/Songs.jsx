@@ -19,7 +19,7 @@ export default function Songs() {
     fetchSongs();
   }, []);
 
-  const handleFavoriteToggle = async (id, currentStatus) => {
+  const handleFavToggle = async (id, currentStatus) => {
     try {
       const updatedSong = await updateFavoriteStatus(id, !currentStatus);
       setSongs((prevSongs) =>
@@ -37,28 +37,28 @@ export default function Songs() {
   return (
     <div className="songs-container">
       <h1>Songs</h1>
-      <div className="songs-container_song labels">
-        <h3>Fav</h3>
-        <h3>Song</h3>
-        <h3>Artist</h3>
-        <h3>Time</h3>
+      <div className="songs-container_table">
+        <div className="songs-container_labels">
+          <h3>Fav</h3>
+          <h3>Song</h3>
+          <h3>Artist</h3>
+          <h3>Time</h3>
+        </div>
+        {songs.length > 0
+          ? songs.map((song) => (
+              <div key={song.id} className="songs-container_songs">
+                <p onClick={() => handleFavToggle(song.id, song.is_favorite)}>
+                  {song.is_favorite ? "★" : "☆"}
+                </p>
+                <Link to={`/${song.id}`}>
+                  <h3>{song.name}</h3>
+                </Link>
+                <h4>{song.artist}</h4>
+                <p>{song.time}</p>
+              </div>
+            ))
+          : "Loading..."}
       </div>
-      {songs.length > 0
-        ? songs.map((song) => (
-            <div key={song.id} className="songs-container_song list">
-              <p
-                onClick={() => handleFavoriteToggle(song.id, song.is_favorite)}
-              >
-                {song.is_favorite ? "★" : "☆"}
-              </p>
-              <Link to={`/${song.id}`}>
-                <h3>{song.name}</h3>
-              </Link>
-              <h4>{song.artist}</h4>
-              <p>{song.time}</p>
-            </div>
-          ))
-        : "Loading..."}
     </div>
   );
 }

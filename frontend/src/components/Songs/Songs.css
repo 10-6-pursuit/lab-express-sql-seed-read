@@ -3,29 +3,36 @@
     color: #651717;
 }
 
-.songs-container_song {
+.songs-container_table {
+    width: 85%;
+    margin: 0px auto;
+    box-shadow: 0 0px 16px white;
+    border-radius: 25px 25px 0px 0px;
+    overflow: hidden;
+}
+
+
+.songs-container_labels, .songs-container_songs {
     display: grid;
     grid-template-columns: 1fr 3fr 3fr 2fr;
     text-align: center;
-    width: 85%;
-    margin: 0px auto 0px auto;
     color: white;
-    border: 1px solid white;
+    border-bottom: 1px solid white;
 }
 
-.songs-container .labels {
+.songs-container_labels {
     background-color: #e24949;
     border-radius: 25px 25px 0px 0px;
 }
 
-.songs-container .list:nth-child(odd) {
+.songs-container_songs:nth-child(odd) {
     background-color: #651717;
 }
 
-.songs-container .list:nth-child(even) {
+.songs-container_songs:nth-child(even) {
     background-color: #e24949;
 }
 
-.songs-container .list a {
+.songs-container_songs a {
     color: white;
 }
