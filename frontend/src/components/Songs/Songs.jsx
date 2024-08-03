@@ -50,7 +50,7 @@ export default function Songs() {
                 <p onClick={() => handleFavToggle(song.id, song.is_favorite)}>
                   {song.is_favorite ? "★" : "☆"}
                 </p>
-                <Link to={`/${song.id}`}>
+                <Link to={`/songs/${song.id}`}>
                   <h3>{song.name}</h3>
                 </Link>
                 <h4>{song.artist}</h4>
