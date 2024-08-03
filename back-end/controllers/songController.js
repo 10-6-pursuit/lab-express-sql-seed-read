@@ -5,7 +5,7 @@ const { checkName, checkArtist, checkBoolean } = require("../validations/checkSo
 
 // Index All Songs Route
 songs.get("/", async (req, res) => {
-    let listOfSongs;
+    let listOfSongs = await getAllSongs();
     switch (req.query.order) {
         case "asc":
         listOfSongs = await getAscSongs();
@@ -13,8 +13,6 @@ songs.get("/", async (req, res) => {
         case "desc":
         listOfSongs = await getDescSongs();
         break;
-        default:
-        listOfSongs = await getAllSongs();
     }
     switch (req.query.is_favorite) {
         case "true":
@@ -23,29 +21,12 @@ songs.get("/", async (req, res) => {
         case "false":
         listOfSongs = await getNotFavSongs();
         break;
-        default:
-        listOfSongs = await getAllSongs();
     }
     if (listOfSongs[0])  {
         res.status(200).json(listOfSongs);
     } else {
         res.status(500).json({ error: "server error"});
     }
-    // if ( order === "asc") {
-    //     const ascSongs = await getAscSongs();
-    //     if (ascSongs[0]) {
-    //         res.status(200).json(ascSongs);
-    //     } else {
-    //         res.status(500).json({ error: "server error"});
-    //     }
-    // }
-
-    // const allSongs = await getAllSongs();
-    // if (allSongs[0]) {
-    //     res.status(200).json(allSongs);
-    // } else {
-    //     res.status(500).json({ error: "server error"});
-    // }
 })
 
 // Show Individual Song Route
@@ -63,7 +44,7 @@ songs.get("/:id", async (req, res) => {
 });
 
 // Add Song Route
-songs.post("/", checkName, checkArtist, checkBoolean, async (req, res) => {
+songs.post("/add", checkName, checkArtist, async (req, res) => {
     const song = await addSong(req.body);
     res.json(song)
 })
@@ -80,7 +61,7 @@ songs.delete("/:id", async (req, res) => {
 })
 
 // Update Song Route
-songs.put("/:id", checkBoolean, async (req, res) => {
+songs.put("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const updatedSong = await updateSong(id, req.body);
