@@ -36,3 +36,7 @@
 .songs-container_songs a {
     color: white;
 }
+
+.songs-container p:hover {
+    cursor: pointer;
+}
