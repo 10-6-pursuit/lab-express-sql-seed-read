@@ -50,8 +50,13 @@ songs.delete("/:id", async (req, res) => {
 // UPDATE
 songs.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const updatedSong = await updateSong(id, req.body);
-  res.status(200).json(updatedSong);
+  try {
+    const updatedSong = await updateSong(req.body, id);
+    res.status(200).json(updatedSong);
+  } catch (error) {
+    console.error("Error updating song:", error);
+    res.status(500).json({ error: "Failed to update song" });
+  }
 });
 
 // UPDATE FAVORITE STATUS
