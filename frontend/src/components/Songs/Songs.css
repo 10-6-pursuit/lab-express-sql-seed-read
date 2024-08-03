@@ -25,11 +25,11 @@
     border-radius: 25px 25px 0px 0px;
 }
 
-.songs-container_songs:nth-child(odd) {
+.songs-container_songs:nth-child(even) {
     background-color: #651717;
 }
 
-.songs-container_songs:nth-child(even) {
+.songs-container_songs:nth-child(odd) {
     background-color: #e24949;
 }
 

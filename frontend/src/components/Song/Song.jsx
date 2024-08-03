@@ -33,17 +33,18 @@ export default function Song() {
   };
 
   return (
-    <div className="song-container">
+    <div className={`song-container ${confirmDelete ? "confirm" : ""}`}>
       <div className="song-container_song">
-        {song && (
+        {song ? (
           <>
-            <p>{song.is_favorite ? "★" : "☆"}</p>
             <h1>
-              {song.name} - By {song.artist}
+              {song.is_favorite ? "★" : "☆"} {song.name} - By {song.artist}
             </h1>
-            <h3>{song.album}</h3>
+            <h3>Album: {song.album}</h3>
             <h4>Time: {song.time}</h4>
           </>
+        ) : (
+          "Loading..."
         )}
       </div>
       <div className="song-container_buttons">
@@ -53,8 +54,10 @@ export default function Song() {
         {confirmDelete && (
           <div className="confirmDelete">
             <h3>Are you sure that you want to delete this song?</h3>
-            <button onClick={handleDelete}>Yes</button>
-            <button onClick={() => setConfirmDelete(false)}>No</button>
+            <div>
+              <button onClick={handleDelete}>Yes</button>
+              <button onClick={() => setConfirmDelete(false)}>No</button>
+            </div>
           </div>
         )}
       </div>
