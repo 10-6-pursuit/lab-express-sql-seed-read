@@ -13,8 +13,10 @@ import "./App.css";
 export default function App() {
   return (
     <div className="app-container">
-      <Nav />
-      <main className="content">
+      <div>
+        <Nav />
+      </div>
+      <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/songs" element={<Songs />} />
@@ -23,7 +25,7 @@ export default function App() {
           <Route path="/songs/:id/edit" element={<SongForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </main>
+      </div>
     </div>
   );
 }

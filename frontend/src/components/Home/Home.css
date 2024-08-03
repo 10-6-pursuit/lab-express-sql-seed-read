@@ -1,0 +1,8 @@
+.home-container h1 {
+    text-align: center;
+}
+
+.home-container_image, .home-container p {
+    text-align: center;
+    margin: 10px 200px;
+}

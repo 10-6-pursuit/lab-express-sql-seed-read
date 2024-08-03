@@ -9,7 +9,6 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
 }
 
 a:hover, button:hover {
@@ -17,11 +16,6 @@ a:hover, button:hover {
 }
 
 .app-container {
-    display: flex;
-}
-
-.content {
-    flex-grow: 1;
-    padding: 20px;
-    margin-left: 10vw;
+    display: grid;
+    grid-template-columns: calc(10vw + 40px) auto;
 }
