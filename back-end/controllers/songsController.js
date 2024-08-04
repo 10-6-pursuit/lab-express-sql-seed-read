@@ -1,11 +1,15 @@
 const express = require("express");
-const songs = express.Router();
-const { getAllSongs, getSong, addSong, deleteSong, updateSong, getAscSongs, getDescSongs, getFavSongs, getNotFavSongs } = require("../queries/song");
+const songs = express.Router({ mergeParams: true });
+const { getAllSongs, getSong, addSong, deleteSong, updateSong, getAscSongs, getDescSongs, getFavSongs, getNotFavSongs } = require("../queries/songs.js");
 const { checkName, checkArtist, checkBoolean } = require("../validations/checkSongs.js")
+
+const { getArtist } = require("../queries/artists.js")
 
 // Index All Songs Route
 songs.get("/", async (req, res) => {
-    let listOfSongs = await getAllSongs();
+    const { artist_id } = req.params
+    const artist = await getArtist(artist_id)
+    let listOfSongs = await getAllSongs(artist_id);
     switch (req.query.order) {
         case "asc":
         listOfSongs = await getAscSongs();
@@ -22,8 +26,8 @@ songs.get("/", async (req, res) => {
         listOfSongs = await getNotFavSongs();
         break;
     }
-    if (listOfSongs[0])  {
-        res.status(200).json(listOfSongs);
+    if (artist.id)  {
+        res.status(200).json({...artist, listOfSongs});
     } else {
         res.status(500).json({ error: "server error"});
     }
@@ -31,13 +35,13 @@ songs.get("/", async (req, res) => {
 
 // Show Individual Song Route
 songs.get("/:id", async (req, res) => {
-    const { id } = req.params;
-    console.log(req.params)
-    const song = await getSong(id);
+    const { artist_id, id } = req.params;
+    const song = await getSong(artist_id, id);
+    const artist = await getArtist(artist_id)
     if (song.received === 0) {
         res.status(404).send("Page not found");
     } else if (song) {
-        res.status(200).json(song);
+        res.status(200).json({...artist, song});
     } else {
         res.status(404).json({ error: "not found" });
     }

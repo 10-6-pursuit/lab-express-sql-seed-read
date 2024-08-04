@@ -1,9 +1,9 @@
 const db = require("../db/dbConfig.js");
 
 // function to get all songs
-const getAllSongs = async () => {
+const getAllSongs = async (artist_id) => {
     try {
-        const allSongs = await db.any("SELECT * FROM songs");
+        const allSongs = await db.any("SELECT * FROM songs WHERE artist_id=$1", artist_id);
         return allSongs;
     } catch (error) {
         return error;
@@ -52,9 +52,9 @@ const getNotFavSongs = async () => {
 
 
 // function to get a single song with id
-const getSong = async (id) => {
+const getSong = async (artistID,id) => {
     try {
-        const oneSong = await db.oneOrNone("SELECT * FROM songs WHERE id=$1", id);
+        const oneSong = await db.oneOrNone("SELECT * FROM songs WHERE id=$1 AND artist_id=$2", [id, artistID]);
         return oneSong;
     } catch (error) {
         return error;
