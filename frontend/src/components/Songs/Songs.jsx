@@ -9,8 +9,10 @@ import "./Songs.css";
 
 export default function Songs() {
   const [songs, setSongs] = useState([]);
-  const [sortMethod, setSortMethod] = useState("dateAdded-asc");
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [sortMethod, setSortMethod] = useState({
+    field: "dateAdded",
+    direction: "asc",
+  });
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -27,7 +29,7 @@ export default function Songs() {
 
   useEffect(() => {
     const sortedSongs = [...songs];
-    songSort(sortedSongs, sortMethod);
+    songSort(sortedSongs, `${sortMethod.field}-${sortMethod.direction}`);
     setSongs(sortedSongs);
   }, [sortMethod]);
 
@@ -46,51 +48,66 @@ export default function Songs() {
     }
   };
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
+  const handleSortChange = (field) => {
+    setSortMethod((prev) => {
+      const newDirection =
+        prev.field === field && prev.direction === "asc" ? "desc" : "asc";
+      return { field, direction: newDirection };
+    });
   };
 
   return (
     <div className="songs-container">
       <h1 className="songs-container_heading">Songs</h1>
       <p className="songs-container_heading">
-        Click on star icon to favorite a song
+        Click on star icon to favorite a song. Click on labels to sort content.
+        Click on song name to get more information.
       </p>
-      <div className="sort-dropdown">
-        <img
-          src="./sort.png"
-          alt="Sort"
-          onClick={toggleDropdown}
-          className="sort-icon"
-        />
-        {dropdownVisible && (
-          <select
-            id="sort"
-            value={sortMethod}
-            onChange={(e) => {
-              setSortMethod(e.target.value);
-              setDropdownVisible(false);
-            }}
-          >
-            <option value="time-asc">Time &#x25B2;</option>
-            <option value="time-desc">Time &#x25BC;</option>
-            <option value="alpha-asc">Name &#x25B2;</option>
-            <option value="alpha-desc">Name &#x25BC;</option>
-            <option value="artist-asc">Artist &#x25B2;</option>
-            <option value="artist-desc">Artist &#x25BC;</option>
-            <option value="dateAdded-asc">Date Added &#x25B2;</option>
-            <option value="dateAdded-desc">Date Added &#x25BC;</option>
-            <option value="fav-asc">Fav &#x25B2;</option>
-            <option value="fav-desc">Fav &#x25BC;</option>
-          </select>
-        )}
-      </div>
+      <h3
+        onClick={() => handleSortChange("dateAdded")}
+        className="songs-container_heading date-added"
+      >
+        Date Added{" "}
+        {sortMethod.field === "dateAdded"
+          ? sortMethod.direction === "asc"
+            ? "▲"
+            : "▼"
+          : ""}
+      </h3>
       <div className="songs-container_table">
         <div className="songs-container_labels">
-          <h3>Fav</h3>
-          <h3>Song</h3>
-          <h3>Artist</h3>
-          <h3>Time</h3>
+          <h3 onClick={() => handleSortChange("fav")}>
+            Fav{" "}
+            {sortMethod.field === "fav"
+              ? sortMethod.direction === "asc"
+                ? "▲"
+                : "▼"
+              : ""}
+          </h3>
+          <h3 onClick={() => handleSortChange("alpha")}>
+            Song{" "}
+            {sortMethod.field === "alpha"
+              ? sortMethod.direction === "asc"
+                ? "▲"
+                : "▼"
+              : ""}
+          </h3>
+          <h3 onClick={() => handleSortChange("artist")}>
+            Artist{" "}
+            {sortMethod.field === "artist"
+              ? sortMethod.direction === "asc"
+                ? "▲"
+                : "▼"
+              : ""}
+          </h3>
+          <h3 onClick={() => handleSortChange("time")}>
+            Time{" "}
+            {sortMethod.field === "time"
+              ? sortMethod.direction === "asc"
+                ? "▲"
+                : "▼"
+              : ""}
+          </h3>
         </div>
         {songs.length > 0
           ? songs.map((song) => (
