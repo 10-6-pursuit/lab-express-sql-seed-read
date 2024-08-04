@@ -3,6 +3,7 @@ import {
   getSongs,
   updateFavoriteStatus,
   songSort,
+  formatDate,
 } from "../../utils/functions";
 import { Link } from "react-router-dom";
 import "./Songs.css";
@@ -63,17 +64,6 @@ export default function Songs() {
         Click on star icon to favorite a song. Click on labels to sort content.
         Click on song name to get more information.
       </p>
-      <h3
-        onClick={() => handleSortChange("dateAdded")}
-        className="songs-container_heading date-added"
-      >
-        Date Added{" "}
-        {sortMethod.field === "dateAdded"
-          ? sortMethod.direction === "asc"
-            ? "▲"
-            : "▼"
-          : ""}
-      </h3>
       <div className="songs-container_table">
         <div className="songs-container_labels">
           <h3 onClick={() => handleSortChange("fav")}>
@@ -108,6 +98,14 @@ export default function Songs() {
                 : "▼"
               : ""}
           </h3>
+          <h3 onClick={() => handleSortChange("dateAdded")}>
+            Date Added{" "}
+            {sortMethod.field === "dateAdded"
+              ? sortMethod.direction === "asc"
+                ? "▲"
+                : "▼"
+              : ""}
+          </h3>
         </div>
         {songs.length > 0
           ? songs.map((song) => (
@@ -123,6 +121,7 @@ export default function Songs() {
                 </Link>
                 <h4>{song.artist}</h4>
                 <p>{song.time}</p>
+                <p>{formatDate(song.created)}</p>
               </div>
             ))
           : "Loading..."}

@@ -136,6 +136,14 @@ export function songSort(songs, sortMethod) {
   }
 }
 
+// Date formatter
+
+export function formatDate(timestamp) {
+  const date = new Date(timestamp);
+  const options = { year: "numeric", month: "short", day: "2-digit" };
+  return date.toLocaleDateString("en-US", options);
+}
+
 // Helper functions
 
 //Convert mm:ss to seconds
