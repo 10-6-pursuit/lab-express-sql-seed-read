@@ -10,6 +10,7 @@ import "./Songs.css";
 export default function Songs() {
   const [songs, setSongs] = useState([]);
   const [sortMethod, setSortMethod] = useState("dateAdded-asc");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -45,6 +46,10 @@ export default function Songs() {
     }
   };
 
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   return (
     <div className="songs-container">
       <h1 className="songs-container_heading">Songs</h1>
@@ -52,23 +57,33 @@ export default function Songs() {
         Click on star icon to favorite a song
       </p>
       <div className="sort-dropdown">
-        <label htmlFor="sort">Sort by: </label>
-        <select
-          id="sort"
-          value={sortMethod}
-          onChange={(e) => setSortMethod(e.target.value)}
-        >
-          <option value="time-asc">Time &#x25B2;</option>
-          <option value="time-desc">Time &#x25BC;</option>
-          <option value="alpha-asc">Name &#x25B2;</option>
-          <option value="alpha-desc">Name &#x25BC;</option>
-          <option value="artist-asc">Artist &#x25B2;</option>
-          <option value="artist-desc">Artist &#x25BC;</option>
-          <option value="dateAdded-asc">Date Added &#x25B2;</option>
-          <option value="dateAdded-desc">Date Added &#x25BC;</option>
-          <option value="fav-asc">Fav &#x25B2;</option>
-          <option value="fav-desc">Fav &#x25BC;</option>
-        </select>
+        <img
+          src="./sort.png"
+          alt="Sort"
+          onClick={toggleDropdown}
+          className="sort-icon"
+        />
+        {dropdownVisible && (
+          <select
+            id="sort"
+            value={sortMethod}
+            onChange={(e) => {
+              setSortMethod(e.target.value);
+              setDropdownVisible(false);
+            }}
+          >
+            <option value="time-asc">Time &#x25B2;</option>
+            <option value="time-desc">Time &#x25BC;</option>
+            <option value="alpha-asc">Name &#x25B2;</option>
+            <option value="alpha-desc">Name &#x25BC;</option>
+            <option value="artist-asc">Artist &#x25B2;</option>
+            <option value="artist-desc">Artist &#x25BC;</option>
+            <option value="dateAdded-asc">Date Added &#x25B2;</option>
+            <option value="dateAdded-desc">Date Added &#x25BC;</option>
+            <option value="fav-asc">Fav &#x25B2;</option>
+            <option value="fav-desc">Fav &#x25BC;</option>
+          </select>
+        )}
       </div>
       <div className="songs-container_table">
         <div className="songs-container_labels">
