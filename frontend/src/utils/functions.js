@@ -90,7 +90,7 @@ export async function updateFavoriteStatus(id, is_favorite) {
 }
 
 // Song Filter
-export function songFilter(songs, sortMethod) {
+export function songSort(songs, sortMethod) {
   switch (sortMethod) {
     case "time-asc":
       songs.sort((a, b) => toSecs(a.time) - toSecs(b.time));
@@ -99,22 +99,36 @@ export function songFilter(songs, sortMethod) {
       songs.sort((a, b) => toSecs(b.time) - toSecs(a.time));
       break;
     case "alpha-asc":
-      songs.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
+      songs.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+      );
       break;
     case "alpha-desc":
-      songs.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1);
+      songs.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1
+      );
       break;
     case "artist-asc":
-      songs.sort((a, b) => a.artist.toLowerCase() > b.artist.toLowerCase() ? 1 : -1);
+      songs.sort((a, b) =>
+        a.artist.toLowerCase() > b.artist.toLowerCase() ? 1 : -1
+      );
       break;
     case "artist-desc":
-      songs.sort((a, b) => a.artist.toLowerCase() > b.artist.toLowerCase() ? -1 : 1);
+      songs.sort((a, b) =>
+        a.artist.toLowerCase() > b.artist.toLowerCase() ? -1 : 1
+      );
       break;
     case "dateAdded-asc":
       songs.sort((a, b) => a.id - b.id);
       break;
     case "dateAdded-desc":
       songs.sort((a, b) => b.id - a.id);
+      break;
+    case "fav-asc":
+      songs.sort((a, b) => b.is_favorite - a.is_favorite);
+      break;
+    case "fav-desc":
+      songs.sort((a, b) => b.is_favorite - a.is_favorite);
       break;
     default:
       songs.sort((a, b) => a.id - b.id);
