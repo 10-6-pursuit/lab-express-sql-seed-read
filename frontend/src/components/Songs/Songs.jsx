@@ -36,7 +36,10 @@ export default function Songs() {
 
   return (
     <div className="songs-container">
-      <h1>Songs</h1>
+      <h1 className="songs-container_heading">Songs</h1>
+      <p className="songs-container_heading">
+        Click on star icon to favorite a song
+      </p>
       <div className="songs-container_table">
         <div className="songs-container_labels">
           <h3>Fav</h3>
@@ -47,10 +50,13 @@ export default function Songs() {
         {songs.length > 0
           ? songs.map((song) => (
               <div key={song.id} className="songs-container_songs">
-                <p onClick={() => handleFavToggle(song.id, song.is_favorite)}>
+                <p
+                  onClick={() => handleFavToggle(song.id, song.is_favorite)}
+                  className="transitional"
+                >
                   {song.is_favorite ? "★" : "☆"}
                 </p>
-                <Link to={`/songs/${song.id}`}>
+                <Link to={`/songs/${song.id}`} className="transitional">
                   <h3>{song.name}</h3>
                 </Link>
                 <h4>{song.artist}</h4>

@@ -1,4 +1,4 @@
-.songs-container h1 {
+.songs-container_heading {
     text-align: center;
     color: #651717;
 }
@@ -10,7 +10,6 @@
     border-radius: 25px 25px 0px 0px;
     overflow: hidden;
 }
-
 
 .songs-container_labels, .songs-container_songs {
     display: grid;
@@ -37,6 +36,30 @@
     color: white;
 }
 
-.songs-container p:hover {
+.transitional {
+    position: relative;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    padding: 2px 0;
+}
+
+.transitional::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.transitional:hover {
     cursor: pointer;
+    transform: scale(1.5);
+}
+
+.transitional:hover::after {
+    width: 100%;
+    left: 0;
 }
