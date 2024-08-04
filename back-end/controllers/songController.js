@@ -44,7 +44,7 @@ songs.get("/:id", async (req, res) => {
 });
 
 // Add Song Route
-songs.post("/add", checkName, checkArtist, async (req, res) => {
+songs.post("/", checkName, checkArtist, checkBoolean, async (req, res) => {
     const song = await addSong(req.body);
     res.json(song)
 })
@@ -61,7 +61,7 @@ songs.delete("/:id", async (req, res) => {
 })
 
 // Update Song Route
-songs.put("/:id", async (req, res) => {
+songs.put("/:id", checkBoolean, async (req, res) => {
     const { id } = req.params;
     try {
         const updatedSong = await updateSong(id, req.body);

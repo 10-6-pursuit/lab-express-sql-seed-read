@@ -54,7 +54,7 @@ const getNotFavSongs = async () => {
 // function to get a single song with id
 const getSong = async (id) => {
     try {
-        const oneSong = await db.one("SELECT * FROM songs WHERE id=$1", id);
+        const oneSong = await db.oneOrNone("SELECT * FROM songs WHERE id=$1", id);
         return oneSong;
     } catch (error) {
         return error;
@@ -64,7 +64,7 @@ const getSong = async (id) => {
 // function to add song to table/database
 const addSong = async (song) => {
     try {
-        const newSong = await db.one(
+        const newSong = await db.oneOrNone(
             "INSERT INTO songs (name, artist, album, time, img_url, vid_url, is_favorite) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *", 
         [song.name, song.artist, song.album, song.time, song.img_url, song.vid_url.slice(-11), song.is_favorite]
         )
@@ -77,7 +77,7 @@ const addSong = async (song) => {
 // function to delete song from database
 const deleteSong = async (id) => {
     try {
-        const deletedSong = await db.one("DELETE FROM songs WHERE id = $1 RETURNING *", id);
+        const deletedSong = await db.oneOrNone("DELETE FROM songs WHERE id = $1 RETURNING *", id);
         return deletedSong
     } catch (error) {
         return error
@@ -87,9 +87,9 @@ const deleteSong = async (id) => {
 // function to update song on database
 const updateSong = async (id, song) => {
     try {
-        const updatedSong = await db.one(
-            "UPDATE songs SET is_favorite=$1 WHERE id=$2 RETURNING *",
-            [song.is_favorite, id]
+        const updatedSong = await db.oneOrNone(
+            "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, img_url=$5, vid_url=$6, is_favorite=$7 WHERE id=$8 RETURNING *",
+            [song.name, song.artist, song.album, song.time, song.img_url, song.vid_url, song.is_favorite, id]
         );
         return updatedSong;
     } catch (error) {
