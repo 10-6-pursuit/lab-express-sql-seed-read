@@ -128,7 +128,7 @@ export function songSort(songs, sortMethod) {
       songs.sort((a, b) => b.is_favorite - a.is_favorite);
       break;
     case "fav-desc":
-      songs.sort((a, b) => b.is_favorite - a.is_favorite);
+      songs.sort((a, b) => a.is_favorite - b.is_favorite);
       break;
     default:
       songs.sort((a, b) => a.id - b.id);
