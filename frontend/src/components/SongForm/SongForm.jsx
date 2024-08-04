@@ -105,14 +105,16 @@ export default function SongForm() {
             placeholder="e.g. 3:45"
           />
         </label>
-        <label>
+        <label className="is-fav">
           Favorite:
           <input
             type="checkbox"
             name="is_favorite"
             checked={form.is_favorite}
             onChange={handleChange}
+            className="star-checkbox"
           />
+          <span className="custom-checkbox"></span>
         </label>
         <button type="submit" disabled={loading}>
           {loading ? "Saving..." : id ? "Update Song" : "Add Song"}

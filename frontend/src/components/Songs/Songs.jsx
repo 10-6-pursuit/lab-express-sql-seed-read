@@ -107,24 +107,26 @@ export default function Songs() {
               : ""}
           </h3>
         </div>
-        {songs.length > 0
-          ? songs.map((song) => (
-              <div key={song.id} className="songs-container_songs">
-                <p
-                  onClick={() => handleFavToggle(song.id, song.is_favorite)}
-                  className="transitional"
-                >
-                  {song.is_favorite ? "★" : "☆"}
-                </p>
-                <Link to={`/songs/${song.id}`} className="transitional">
-                  <h3>{song.name}</h3>
-                </Link>
-                <h4>{song.artist}</h4>
-                <p>{song.time}</p>
-                <p>{formatDate(song.created)}</p>
-              </div>
-            ))
-          : "Loading..."}
+        {songs.length > 0 ? (
+          songs.map((song) => (
+            <div key={song.id} className="songs-container_songs">
+              <p
+                onClick={() => handleFavToggle(song.id, song.is_favorite)}
+                className="transitional"
+              >
+                {song.is_favorite ? "★" : "☆"}
+              </p>
+              <Link to={`/songs/${song.id}`} className="transitional">
+                <h3>{song.name}</h3>
+              </Link>
+              <h4>{song.artist}</h4>
+              <p>{song.time}</p>
+              <p>{formatDate(song.created)}</p>
+            </div>
+          ))
+        ) : (
+          <div className="songs-container_loading">Loading songs...</div>
+        )}
       </div>
     </div>
   );

@@ -27,7 +27,7 @@
     user-select: none;
 }
 
-.songs-container_labels:hover, .date-added:hover {
+.songs-container_labels:hover {
     cursor: pointer;
 }
 
@@ -69,4 +69,10 @@
 .transitional:hover::after {
     width: 100%;
     left: 0;
+}
+
+.songs-container_loading {
+    padding: 10px 40px;
+    background-color: #e24949;
+    color: white;
 }
