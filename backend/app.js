@@ -12,6 +12,9 @@ app.use(express.json());
 const songs = require("./controllers/songController.js");
 app.use("/songs", songs);
 
+const playlistsRouter = require("./controllers/playlistControllers");
+app.use("/playlists", playlistsRouter);
+
 // ROUTES
 app.get("/", (req, res) => res.send("Welcome to Tuner"));
 
