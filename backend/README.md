@@ -134,24 +134,28 @@ Upgrade the app so that a playlist can have many songs and a song can belong to 
 Add users so that users can have many playlists
 Add the ability for users to like songs (many songs can be liked by users, users can like many songs)
 
-
+```
 root
-  ├─assets
-  ├─backend
-  │   ├─controllers
-  │   │  └─songControllers.js
-  │   ├─db
-  │   │  ├──db-config.js
-  │   │  ├──schema.sql
-  │   │  └──seed.sql
-  │   ├─node_modules
-  │   ├─queries
-  │   │  └──songs.js
-  │   ├─.env
-  │   ├─.gitignore
-  │   ├─app.js
-  │   ├─package-lock.json
-  │   ├─package.json
-  │   ├─READEME.md
-  │   └─server.js
-  └─frontend
+├─assets
+├─backend
+│ ├─controllers
+│ │ ├─songControllers.js
+│ │ └─playlistControllers.js
+│ ├─db
+│ │ ├──db-config.js
+│ │ ├──schema.sql
+│ │ └──seed.sql
+│ ├─node_modules
+│ ├─queries
+│ │ ├──songs.js
+│ │ └──playlists.js
+│ ├─.env
+│ ├─.gitignore
+│ ├─app.js
+│ ├─package-lock.json
+│ ├─package.json
+│ ├─READEME.md
+│ └─server.js
+└─frontend
+
+```

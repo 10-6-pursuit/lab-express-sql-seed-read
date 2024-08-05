@@ -1,6 +1,5 @@
 const db = require("../db/db-config.js");
 
-// CREATE Playlist
 const createPlaylist = async (playlist) => {
   const { name } = playlist;
   try {
@@ -14,7 +13,6 @@ const createPlaylist = async (playlist) => {
   }
 };
 
-// INDEX Playlists
 const getAllPlaylists = async () => {
   try {
     const allPlaylists = await db.any("SELECT * FROM playlists");
@@ -24,7 +22,6 @@ const getAllPlaylists = async () => {
   }
 };
 
-// SHOW Playlist
 const getPlaylist = async (id) => {
   try {
     const playlist = await db.one("SELECT * FROM playlists WHERE id=$1", id);
@@ -38,7 +35,6 @@ const getPlaylist = async (id) => {
   }
 };
 
-// ADD Song to Playlist
 const addSongToPlaylist = async (playlistId, songId) => {
   try {
     await db.none(
@@ -50,7 +46,6 @@ const addSongToPlaylist = async (playlistId, songId) => {
   }
 };
 
-// REMOVE Song from Playlist
 const removeSongFromPlaylist = async (playlistId, songId) => {
   try {
     await db.none(
