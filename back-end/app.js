@@ -5,12 +5,13 @@ const express = require("express");
 // Configuration
 const app = express();
 
+const { getEverySongInDataBase } = require("./queries/songs.js")
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Controllers
-// const songsController = require("./controllers/songController.js")
 const artistsController = require("./controllers/artistsController.js")
 
 
@@ -19,7 +20,16 @@ app.get("/", (req, res) => {
     res.send("Welcome to Youtunes");
 })
 
-// app.use("/songs", songsController);
+// Index All Songs Route
+app.get("/allsongs", async (req, res) => {
+    const everySong = await getEverySongInDataBase();
+    if(everySong[0]) {
+        res.status(200).json(everySong)
+    } else {
+        res.status(500).json({ error: "server error"});
+    }
+})
+
 app.use("/artists", artistsController);
 
 // 404 page

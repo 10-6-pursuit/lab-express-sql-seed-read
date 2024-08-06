@@ -5,7 +5,6 @@ const { checkName, checkArtist, checkBoolean } = require("../validations/checkSo
 
 const { getArtist } = require("../queries/artists.js")
 
-// Index All Songs Route
 songs.get("/", async (req, res) => {
     const { artist_id } = req.params
     const artist = await getArtist(artist_id)

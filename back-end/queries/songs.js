@@ -1,6 +1,15 @@
 const db = require("../db/dbConfig.js");
 
 // function to get all songs
+const getEverySongInDataBase = async() => {
+    try {
+        const everySong = await db.any("SELECT * FROM songs");
+        return everySong;
+    } catch (error) {
+        return error;
+    }
+}
+
 const getAllSongs = async (artist_id) => {
     try {
         const allSongs = await db.any("SELECT * FROM songs WHERE artist_id=$1", artist_id);
@@ -9,6 +18,7 @@ const getAllSongs = async (artist_id) => {
         return error;
     }
 };
+
 
 // function to get songs in asc order
 const getAscSongs = async () => {
@@ -98,7 +108,8 @@ const updateSong = async (id, song) => {
 }
 
 module.exports = { 
-    getAllSongs, 
+    getAllSongs,
+    getEverySongInDataBase, 
     getSong, 
     addSong, 
     deleteSong, 
