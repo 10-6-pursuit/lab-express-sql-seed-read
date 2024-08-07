@@ -75,8 +75,8 @@ const getSong = async (artistID,id) => {
 const addSong = async (song) => {
     try {
         const newSong = await db.oneOrNone(
-            "INSERT INTO songs (name, artist, album, time, img_url, vid_url, is_favorite) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *", 
-        [song.name, song.artist, song.album, song.time, song.img_url, song.vid_url.slice(-11), song.is_favorite]
+            "INSERT INTO songs (name, artist, album, time, img_url, vid_url, is_favorite, artist_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *", 
+        [song.name, song.artist, song.album, song.time, song.img_url, song.vid_url, song.is_favorite, song.artist_id]
         )
         return newSong;
     } catch (error) {
@@ -95,11 +95,11 @@ const deleteSong = async (id) => {
 }
 
 // function to update song on database
-const updateSong = async (id, song) => {
+const updateSong = async (song) => {
     try {
         const updatedSong = await db.oneOrNone(
-            "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, img_url=$5, vid_url=$6, is_favorite=$7 WHERE id=$8 RETURNING *",
-            [song.name, song.artist, song.album, song.time, song.img_url, song.vid_url, song.is_favorite, id]
+            "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, img_url=$5, vid_url=$6, is_favorite=$7, artist_id=$8 WHERE id=$9 RETURNING *",
+            [song.name, song.artist, song.album, song.time, song.img_url, song.vid_url, song.is_favorite, song.artist_id, song.id]
         );
         return updatedSong;
     } catch (error) {

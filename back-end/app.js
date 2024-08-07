@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Controllers
+// const songsController = require("./controllers/songsController.js")
 const artistsController = require("./controllers/artistsController.js")
 
 
@@ -30,6 +31,7 @@ app.get("/allsongs", async (req, res) => {
     }
 })
 
+// app.use("/songs", songsController);
 app.use("/artists", artistsController);
 
 // 404 page

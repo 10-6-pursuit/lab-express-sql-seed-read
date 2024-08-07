@@ -37,9 +37,7 @@ songs.get("/:id", async (req, res) => {
     const { artist_id, id } = req.params;
     const song = await getSong(artist_id, id);
     const artist = await getArtist(artist_id)
-    if (song.received === 0) {
-        res.status(404).send("Page not found");
-    } else if (song) {
+    if (song) {
         res.status(200).json({...artist, song});
     } else {
         res.status(404).json({ error: "not found" });
@@ -48,8 +46,9 @@ songs.get("/:id", async (req, res) => {
 
 // Add Song Route
 songs.post("/", checkName, checkArtist, checkBoolean, async (req, res) => {
-    const song = await addSong(req.body);
-    res.json(song)
+    const { artist_id } = req.params;
+    const song = await addSong({artist_id, ...req.body});
+    res.status(200).json(song)
 })
 
 // Delete Song Route
@@ -65,9 +64,9 @@ songs.delete("/:id", async (req, res) => {
 
 // Update Song Route
 songs.put("/:id", checkBoolean, async (req, res) => {
-    const { id } = req.params;
+    const { id, artist_id } = req.params;
     try {
-        const updatedSong = await updateSong(id, req.body);
+        const updatedSong = await updateSong({ artist_id, id, ...req.body });
         res.status(200).json(updatedSong);
     } catch (error) {
         res.status(404).json("Song not found");
