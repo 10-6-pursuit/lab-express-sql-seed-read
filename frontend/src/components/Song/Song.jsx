@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Song.css";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getSong, deleteSong } from "../../utils/songFetch";
+
+import "./Song.css";
 
 export default function Song() {
   const { id } = useParams();
