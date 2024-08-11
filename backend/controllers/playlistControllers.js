@@ -13,7 +13,11 @@ const {
 playlists.get("/", async (req, res) => {
   try {
     const allPlaylists = await getAllPlaylists();
-    res.status(200).json(allPlaylists);
+    if (allPlaylists.length) {
+      res.status(200).json(allPlaylists);
+    } else {
+      res.status(404).json({ error: "No playlists found" });
+    }
   } catch (error) {
     res.status(500).json({ error: "Error fetching playlists" });
   }
@@ -36,9 +40,14 @@ playlists.get("/:id", async (req, res) => {
 
 // CREATE
 playlists.post("/", async (req, res) => {
+  const { name } = req.body;
   try {
-    const playlist = await createPlaylist(req.body);
-    res.status(201).json(playlist);
+    if (!name) {
+      res.status(400).json({ error: "Playlist name is required" });
+    } else {
+      const playlist = await createPlaylist(req.body);
+      res.status(201).json(playlist);
+    }
   } catch (error) {
     res.status(500).json({ error: "Error creating playlist" });
   }
@@ -49,8 +58,12 @@ playlists.post("/:id/songs", async (req, res) => {
   const { id } = req.params;
   const { songId } = req.body;
   try {
-    await addSongToPlaylist(id, songId);
-    res.status(200).json({ message: "Song added to playlist" });
+    if (!songId) {
+      res.status(400).json({ error: "Song ID is required" });
+    } else {
+      await addSongToPlaylist(id, songId);
+      res.status(200).json({ message: "Song added to playlist" });
+    }
   } catch (error) {
     res.status(500).json({ error: "Error adding song to playlist" });
   }
@@ -61,8 +74,12 @@ playlists.delete("/:id/songs", async (req, res) => {
   const { id } = req.params;
   const { songId } = req.body;
   try {
-    await removeSongFromPlaylist(id, songId);
-    res.status(200).json({ message: "Song removed from playlist" });
+    if (!songId) {
+      res.status(400).json({ error: "Song ID is required" });
+    } else {
+      await removeSongFromPlaylist(id, songId);
+      res.status(200).json({ message: "Song removed from playlist" });
+    }
   } catch (error) {
     res.status(500).json({ error: "Error removing song from playlist" });
   }
