@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createSong, updateSong, getSong } from "../../utils/functions";
+import { createSong, updateSong, getSong } from "../../utils/songFetch";
 import "./SongForm.css";
 
 export default function SongForm() {
