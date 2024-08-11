@@ -14,12 +14,13 @@ const {
 songs.get("/", async (req, res) => {
   try {
     const allSongs = await getAllSongs();
-    if (allSongs[0]) {
+    if (allSongs.length) {
       res.status(200).json(allSongs);
     } else {
-      res.status(404).json({ error: "Error fetching all songs" });
+      res.status(404).json({ error: "No songs found" });
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Error fetching all songs" });
   }
 });
@@ -34,6 +35,7 @@ songs.get("/:id", async (req, res) => {
       res.status(404).json({ error: `Song with id ${id} not found` });
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to search for song" });
   }
 });
@@ -43,13 +45,14 @@ songs.post("/", async (req, res) => {
   const { name, artist } = req.body;
   try {
     if (!name || !artist) {
-      res.status(400).json({ error: "Song/artist name was not provided" });
+      res.status(400).json({ error: "Song and artist name are required" });
     } else {
       const song = await createSong(req.body);
-      res.status(200).json(song);
+      res.status(201).json(song);
     }
   } catch (error) {
-    res.status(500).json({ error: "error creating new song" });
+    console.error(error);
+    res.status(500).json({ error: "Error creating new song" });
   }
 });
 
@@ -59,15 +62,17 @@ songs.put("/:id", async (req, res) => {
   const { name, artist } = req.body;
   try {
     if (!name || !artist) {
-      res.status(400).json({ error: "Song/artist name was not provided" });
+      res.status(400).json({ error: "Song and artist name are required" });
     } else {
       const updatedSong = await updateSong(req.body, id);
-      if (!updatedSong) {
+      if (updatedSong) {
+        res.status(200).json(updatedSong);
+      } else {
         res.status(404).json({ error: "Failed to find song" });
       }
-      res.status(200).json(updatedSong);
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to update song" });
   }
 });
@@ -77,12 +82,13 @@ songs.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const deletedSong = await deleteSong(id);
-    if (deletedSong.id) {
+    if (deletedSong) {
       res.status(200).json(deletedSong);
     } else {
-      res.status(404).json("Song not found");
+      res.status(404).json({ error: "Song not found" });
     }
   } catch (error) {
+    console.error(error);
     res
       .status(500)
       .json({ error: "An error occurred while deleting the song" });
@@ -101,7 +107,8 @@ songs.put("/:id/favorite", async (req, res) => {
       res.status(404).json({ error: `Song with id ${id} not found` });
     }
   } catch (error) {
-    res.status(400).json({ error: "Error updating favorite status" });
+    console.error(error);
+    res.status(500).json({ error: "Error updating favorite status" });
   }
 });
 
