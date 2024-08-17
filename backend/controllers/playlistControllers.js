@@ -7,6 +7,7 @@ const {
   getPlaylist,
   addSongToPlaylist,
   removeSongFromPlaylist,
+  deletePlaylist,
 } = require("../queries/playlists");
 
 // INDEX
@@ -82,6 +83,17 @@ playlists.delete("/:id/songs", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: "Error removing song from playlist" });
+  }
+});
+
+// DELETE Playlist
+playlists.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await deletePlaylist(id);
+    res.status(200).json({ message: "Playlist deleted" });
+  } catch (error) {
+    res.status(500).json({ error: "Error deleting playlist" });
   }
 });
 

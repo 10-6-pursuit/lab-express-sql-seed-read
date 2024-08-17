@@ -57,10 +57,19 @@ const removeSongFromPlaylist = async (playlistId, songId) => {
   }
 };
 
+const deletePlaylist = async (id) => {
+  try {
+    await db.none("DELETE FROM playlists WHERE id=$1", id);
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createPlaylist,
   getAllPlaylists,
   getPlaylist,
   addSongToPlaylist,
   removeSongFromPlaylist,
+  deletePlaylist,
 };

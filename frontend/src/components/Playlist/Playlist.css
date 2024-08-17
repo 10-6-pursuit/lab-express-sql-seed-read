@@ -1,0 +1,68 @@
+.create-playlist-form {
+    width: 85%;
+    margin: 5% auto;
+    padding: 20px;
+    background-color: #B71C1C;
+    border-radius: 10px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.create-playlist-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.create-playlist-form label {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.create-playlist-form input {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.create-playlist-form button {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #D32F2F;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.create-playlist-form button:hover {
+    background-color: #FFCDD2;
+    color: #B71C1C;
+    border: none;
+}
+
+.create-playlist-form .error-message {
+    color: #FFCDD2;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.create-playlist-form .success-message {
+    color: #C6FF00;
+    font-size: 14px;
+    margin-bottom: 15px;
+}

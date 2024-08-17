@@ -9,6 +9,7 @@ import SongForm from "./components/SongForm/SongForm.jsx";
 import Songs from "./components/Songs/Songs.jsx";
 
 import "./App.css";
+import Playlist from "./components/Playlist/Playlist.jsx";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/songs/:id" element={<Song />} />
           <Route path="/songs/new" element={<SongForm />} />
           <Route path="/songs/:id/edit" element={<SongForm />} />
+          <Route path="/playlists" element={<Playlist />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

@@ -79,3 +79,21 @@ export async function removeSongFromPlaylist(id, songId) {
     throw error;
   }
 }
+
+// Delete playlist
+export async function deletePlaylist(id) {
+  const options = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  };
+  try {
+    const response = await fetch(`${URL}/playlists/${id}`, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error deleting playlist:", error);
+    throw error;
+  }
+}
