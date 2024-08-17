@@ -1,4 +1,5 @@
-s
+const express = require("express");
+const songs = express.Router();
 
 const {
   getAllSongs,
