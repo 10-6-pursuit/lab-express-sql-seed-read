@@ -1,15 +1,22 @@
-.create-playlist-form {
+.playlist-container {
     width: 85%;
     margin: 5% auto;
+    padding: 20px;
+    color: #651717;
+}
+
+.playlist-heading {
+    text-align: center;
+    color: #651717;
+}
+
+.create-playlist-form {
+    width: 100%;
+    margin-bottom: 20px;
     padding: 20px;
     background-color: #B71C1C;
     border-radius: 10px;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     color: white;
 }
 
@@ -65,4 +72,67 @@
     color: #C6FF00;
     font-size: 14px;
     margin-bottom: 15px;
+}
+
+.playlists-table {
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 0px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 25px 25px 0px 0px;
+    overflow: hidden;
+}
+
+.playlists-header, .playlist-item {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    color: white;
+    border-bottom: 1px solid white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.playlists-header {
+    background-color: #e24949;
+    border-radius: 25px 25px 0px 0px;
+    user-select: none;
+}
+
+.playlists-header:hover {
+    cursor: pointer;
+}
+
+.playlist-item:nth-child(even) {
+    background-color: #651717;
+}
+
+.playlist-item:nth-child(odd) {
+    background-color: #e24949;
+}
+
+.playlist-item a {
+    color: white;
+}
+
+.playlists-loading {
+    padding: 10px 40px;
+    background-color: #e24949;
+    color: white;
+}
+
+.toggle-form-button {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #D32F2F;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-form-button:hover {
+    background-color: #FFCDD2;
 }
