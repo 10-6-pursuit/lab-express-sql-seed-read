@@ -8,8 +8,6 @@ import "./Playlists.css";
 
 export default function Playlists() {
   const [name, setName] = useState("");
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
   const [playlists, setPlaylists] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
