@@ -5,7 +5,7 @@ CREATE DATABASE songs_db;
 \c songs_db;
 
 -- Create songs table
-CREATE TABLE songs (
+CREATE TABLE songs (    
     id SERIAL PRIMARY KEY,
     created TIMESTAMP DEFAULT NOW(),
     name TEXT NOT NULL,

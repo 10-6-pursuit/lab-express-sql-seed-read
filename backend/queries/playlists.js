@@ -1,66 +1,81 @@
-const db = require("../db/db-config.js");
+const URL = import.meta.env.VITE_URL;
 
-const createPlaylist = async (playlist) => {
-  const { name } = playlist;
+// Get all playlists
+export async function getPlaylists() {
+  const response = await fetch(`${URL}/playlists`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+}
+
+// Get playlist
+export async function getPlaylist(id) {
   try {
-    const newPlaylist = await db.one(
-      "INSERT INTO playlists (name) VALUES($1) RETURNING *",
-      [name]
-    );
-    return newPlaylist;
+    const response = await fetch(`${URL}/playlists/${id}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
   } catch (error) {
+    console.error("Error fetching playlist:", error);
     throw error;
   }
-};
+}
 
-const getAllPlaylists = async () => {
+// Create playlist
+export async function createPlaylist(playlist) {
+  const options = {
+    method: "POST",
+    body: JSON.stringify(playlist),
+    headers: { "Content-Type": "application/json" },
+  };
   try {
-    const allPlaylists = await db.any("SELECT * FROM playlists");
-    return allPlaylists;
+    const response = await fetch(`${URL}/playlists`, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
   } catch (error) {
+    console.error("Error creating playlist:", error);
     throw error;
   }
-};
+}
 
-const getPlaylist = async (id) => {
+// Add song to playlist
+export async function addSongToPlaylist(id, songId) {
+  const options = {
+    method: "POST",
+    body: JSON.stringify({ songId }),
+    headers: { "Content-Type": "application/json" },
+  };
   try {
-    const playlist = await db.one("SELECT * FROM playlists WHERE id=$1", id);
-    const songs = await db.any(
-      "SELECT s.* FROM songs s JOIN playlist_songs ps ON s.id = ps.song_id WHERE ps.playlist_id=$1",
-      id
-    );
-    return { ...playlist, songs };
+    const response = await fetch(`${URL}/playlists/${id}/songs`, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
   } catch (error) {
+    console.error("Error adding song to playlist:", error);
     throw error;
   }
-};
+}
 
-const addSongToPlaylist = async (playlistId, songId) => {
+// Remove song from playlist
+export async function removeSongFromPlaylist(id, songId) {
+  const options = {
+    method: "DELETE",
+    body: JSON.stringify({ songId }),
+    headers: { "Content-Type": "application/json" },
+  };
   try {
-    await db.none(
-      "INSERT INTO playlist_songs (playlist_id, song_id) VALUES($1, $2) ON CONFLICT DO NOTHING",
-      [playlistId, songId]
-    );
+    const response = await fetch(`${URL}/playlists/${id}/songs`, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
   } catch (error) {
+    console.error("Error removing song from playlist:", error);
     throw error;
   }
-};
-
-const removeSongFromPlaylist = async (playlistId, songId) => {
-  try {
-    await db.none(
-      "DELETE FROM playlist_songs WHERE playlist_id=$1 AND song_id=$2",
-      [playlistId, songId]
-    );
-  } catch (error) {
-    throw error;
-  }
-};
-
-module.exports = {
-  createPlaylist,
-  getAllPlaylists,
-  getPlaylist,
-  addSongToPlaylist,
-  removeSongFromPlaylist,
-};
+}
