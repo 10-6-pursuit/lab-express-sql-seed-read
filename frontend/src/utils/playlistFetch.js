@@ -14,11 +14,11 @@ export async function getPlaylist(id) {
   try {
     const response = await fetch(`${URL}/playlists/${id}`);
     if (!response.ok) {
-      throw new Error(`HTTP error! stats: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
-    console.error("Error fetching song:", error);
+    console.error("Error fetching playlist:", error);
     throw error;
   }
 }
@@ -43,7 +43,39 @@ export async function createPlaylist(playlist) {
 }
 
 // Add song to playlist
-export async function addSongToPlaylist(id, songId) {}
+export async function addSongToPlaylist(id, songId) {
+  const options = {
+    method: "POST",
+    body: JSON.stringify({ songId }),
+    headers: { "Content-Type": "application/json" },
+  };
+  try {
+    const response = await fetch(`${URL}/playlists/${id}/songs`, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error adding song to playlist:", error);
+    throw error;
+  }
+}
 
 // Remove song from playlist
-export async function removeSongFromPlaylist(id, songId) {}
+export async function removeSongFromPlaylist(id, songId) {
+  const options = {
+    method: "DELETE",
+    body: JSON.stringify({ songId }),
+    headers: { "Content-Type": "application/json" },
+  };
+  try {
+    const response = await fetch(`${URL}/playlists/${id}/songs`, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error removing song from playlist:", error);
+    throw error;
+  }
+}
