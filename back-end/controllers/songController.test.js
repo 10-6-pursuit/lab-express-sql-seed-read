@@ -1,6 +1,6 @@
 const request = require("supertest");
 
-const songs = require("../app.js");
+const songs = require("./app.js");
 const db = require("../db/dbConfig.js");
 
 // describe("One", () => {
