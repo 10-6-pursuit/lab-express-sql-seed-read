@@ -1,0 +1,91 @@
+.song-form-container {
+    width: 85%;
+    margin: 5% auto;
+    padding: 20px;
+    background-color: #B71C1C;
+    border-radius: 10px;
+    box-shadow: 0 0px 16px white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.song-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.song-form-container label {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.song-form-container form input {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.song-form-container form input[name=is_favorite] {
+    display: none;
+}
+
+.song-form-container .is-fav {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+
+.song-form-container .is-fav .custom-checkbox {
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.song-form-container .is-fav input[type="checkbox"]:checked+.custom-checkbox {
+    color: #FFCDD2;
+}
+
+.song-form-container .is-fav .custom-checkbox::before {
+    content: '☆';
+}
+
+.song-form-container .is-fav input[type="checkbox"]:checked+.custom-checkbox::before {
+    content: '★';
+}
+
+.song-form-container button {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #D32F2F;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.song-form-container button:hover {
+    background-color: #FFCDD2;
+    color: #fff;
+    border: none;
+}
+
+.error {
+    color: #D32F2F;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
